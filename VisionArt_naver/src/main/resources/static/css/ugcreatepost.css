@@ -1,0 +1,85 @@
+@charset "UTF-8";
+#posth2 {
+	color: #1d242b;
+	text-align: center;
+}
+
+p {
+	padding-left: 90px;
+	font-weight: bold;
+}
+
+.post {
+	margin: auto;
+	margin-bottom: 40px;
+	position: auto;
+	top: 20%;
+	align-self: center;
+	width: 650px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-radius: 30px;
+	background-color: #c7eeff;
+}
+
+.box {
+	width: 71%;
+	height: 1.5em;
+	resize: none;
+	border-width: 2px;
+	
+
+	margin-left: 90px;
+	margin-top: 10px;
+}
+
+label {
+	text-align: left;
+	padding: 10px;
+}
+
+input[type=text] {
+	width: 70%;
+	height: 30px;
+	resize: none;
+	border-width: 2px;
+	border-style: solid;
+	margin-left: 90px;
+}
+
+textarea {
+	width: 70%;
+	height: 13.25em;
+	resize: none;
+	border-width: 2px;
+	border-style: solid;
+	margin-left: 90px;
+}
+
+#aniType {
+	margin-left: 90px;
+}
+input[type="submit"] {
+   text-align: center;
+	width: 100px;
+	height: 35px;
+	font-size: 15px;
+	font-weight: 550;
+	border-color: #EDE0D4;
+	background-color:#a6e3e9;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px lightgrey;
+	margin-left: 280px;
+}
+#pbtn {
+	text-align: center;
+	width: 100px;
+	height: 35px;
+	font-size: 15px;
+	font-weight: 550;
+	border-color: #EDE0D4;
+	background-color:#0077c0;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px lightgrey;
+	margin-left: 280px;
+}

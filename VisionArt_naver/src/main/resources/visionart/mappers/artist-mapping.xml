@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mc.full17th2.dao.ArtistDAO">
+    <resultMap id="dbArtistDto" type="com.mc.full17th2.dto.DBArtistDTO">
+        <result property="artistId" column="artist_id"/>
+        <result property="artistName" column="artist_name"/>
+    </resultMap>
+
+    <select id="getAllArtistCount">
+        <![CDATA[
+        SELECT COUNT(*) FROM artist;
+        ]]>
+    </select>
+    <select id="getKeywordArtistCount">
+        <![CDATA[
+        SELECT COUNT(*) FROM artist
+        WHERE artist_name LIKE CONCAT('%',#{keyword},'%');
+        ]]>
+    </select>
+
+    <!-- 작가 목록 -->
+    <select id="getArtistList" resultMap="dbArtistDto">
+        <![CDATA[ 
+        SELECT artist_id, artist_name
+            FROM artist
+            ORDER BY artist_id
+            LIMIT #{start}, #{limit};
+        ]]>
+    </select>
+    <!-- 작가 목록 - 작가명 검색 시 -->
+    <select id="getArtistListNameSearch" resultMap="dbArtistDto">
+        <![CDATA[ 
+        SELECT artist_id, artist_name
+            FROM artist
+            WHERE artist_name LIKE CONCAT('%',#{keyword},'%')
+            ORDER BY artist_id
+            LIMIT #{start}, #{limit};
+        ]]>
+    </select>
+</mapper>

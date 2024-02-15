@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mc.full17th2.dao.TempCommentDAO">
+    <resultMap id="tempMyPageCommentDTO" type="com.mc.full17th2.dto.TempMyPageCommentDTO">
+        <result property="commentId" column="comment_id"/>
+        <result property="postId" column="post_id"/>
+        <result property="commentContent" column="comment_content"/>
+        <result property="commentDate" column="comment_datetime"/>
+        <result property="commentTime" column="comment_datetime"/>
+        <result property="postTitle" column="title"/>
+        <result property="postFieldId" column="post_field_id"/>
+        <result property="postFieldName" column="post_field_name"/>
+    </resultMap>
+
+    <!-- 불러오는 전체 데이터 개수 -->
+    <select id="getMyAllCommentCount">
+        <![CDATA[ 
+            SELECT COUNT(*) FROM comments WHERE member_id=#{memberId};
+        ]]>
+    </select>
+    <select id="getMyAllComments" resultMap="tempMyPageCommentDTO">
+        <![CDATA[ 
+        SELECT comment_id, post.post_id, comment_content, post.post_field_id, post_field_name, comment_datetime, title
+            FROM comments cm
+            LEFT JOIN post ON cm.post_id=post.post_id
+            LEFT JOIN post_field pf ON post.post_field_id=pf.post_field_id
+            WHERE cm.member_id=#{memberId}
+            ORDER BY comment_id DESC
+            LIMIT #{start}, #{limit};
+        ]]>
+    </select>
+</mapper>

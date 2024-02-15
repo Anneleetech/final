@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.full17th2.dao.MuseumDAO">
+
+<!-- <select id="selectDupl" resultType="int" parameterType="java.util.HashMap">
+    select count(*) from visionartdb.museum where fcltyNm = #{fcltyNm} and rdnmadr = #{rdnmadr}
+</select> -->
+<select id="selectDupl" resultType="int" parameterType="java.util.HashMap">
+    SELECT COUNT(*) FROM visionartdb.museum
+    WHERE fcltyNm = #{fcltyNm}
+      AND fcltyType = #{fcltyType}
+      AND rdnmadr = #{rdnmadr}
+      AND lnmadr = #{lnmadr}
+      AND latitude = #{latitude}
+      AND longitude = #{longitude}
+      
+</select>
+
+   <insert id="insertMuseumInfo" parameterType="com.mc.full17th2.dto.MuseumDTOList">
+        <foreach collection="museumDTOList" item="m" separator=","
+                 open="INSERT INTO visionartdb.museum (
+                    fcltyNm, fcltyType, rdnmadr, lnmadr, latitude, longitude, operPhoneNumber, 
+                    operInstitutionNm, homepageUrl, fcltyInfo, weekdayOperOpenHhmm, weekdayOperColseHhmm,  
+                    holidayOperOpenHhmm, holidayCloseOpenHhmm, rstdeInfo, adultChrge, yngbgsChrge, 
+                    childChrge, etcChrgeInfo, fcltyIntrcn, trnsportInfo, phoneNumber, institutionNm, 
+                    referenceDate, insttCode
+                ) VALUES "
+                 close="">
+                   (
+            #{m.fcltyNm}, #{m.fcltyType}, #{m.rdnmadr}, #{m.lnmadr}, 
+            #{m.latitude}, #{m.longitude}, #{m.operPhoneNumber}, #{m.operInstitutionNm}, 
+            #{m.homepageUrl}, #{m.fcltyInfo}, #{m.weekdayOperOpenHhmm}, #{m.weekdayOperColseHhmm},
+            #{m.holidayOperOpenHhmm}, #{m.holidayCloseOpenHhmm}, #{m.rstdeInfo}, #{m.adultChrge}, 
+            #{m.yngbgsChrge}, #{m.childChrge}, #{m.etcChrgeInfo}, #{m.fcltyIntrcn}, 
+            #{m.trnsportInfo}, #{m.phoneNumber}, #{m.institutionNm}, #{m.referenceDate}, 
+            #{m.insttCode}
+                )
+        </foreach>
+    </insert>
+
+<select id="selectAllCnt" resultType="int">
+    select count(*) from visionartdb.museum
+</select>
+
+ <resultMap id="museumResultMap" type="com.mc.full17th2.dto.MuseumDTO">
+        <result property="fcltyNm" column="fcltyNm"/>
+        <result property="fcltyType" column="fcltyType"/>
+        <result property="rdnmadr" column="rdnmadr"/>
+        <result property="lnmadr" column="lnmadr"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="operPhoneNumber" column="operPhoneNumber"/>
+        <result property="operInstitutionNm" column="operInstitutionNm"/>
+        <result property="homepageUrl" column="homepageUrl"/>
+        <!-- 나머지 필드들에 대한 result 추가 -->
+        <result property="fcltyInfo" column="fcltyInfo"/>
+        <result property="weekdayOperOpenHhmm" column="weekdayOperOpenHhmm"/>
+        <result property="weekdayOperColseHhmm" column="weekdayOperColseHhmm"/>
+        <result property="holidayOperOpenHhmm" column="holidayOperOpenHhmm"/>
+        <result property="holidayCloseOpenHhmm" column="holidayCloseOpenHhmm"/>
+        <result property="rstdeInfo" column="rstdeInfo"/>
+        <result property="adultChrge" column="adultChrge"/>
+        <result property="yngbgsChrge" column="yngbgsChrge"/>
+        <result property="childChrge" column="childChrge"/>
+        <result property="etcChrgeInfo" column="etcChrgeInfo"/>
+        <result property="fcltyIntrcn" column="fcltyIntrcn"/>
+        <result property="trnsportInfo" column="trnsportInfo"/>
+        <result property="phoneNumber" column="phoneNumber"/>
+        <result property="institutionNm" column="institutionNm"/>
+        <result property="referenceDate" column="referenceDate"/>
+        <result property="insttCode" column="insttCode"/>
+    </resultMap>
+
+<select id="selectByAddr" resultMap="museumResultMap" parameterType="String">
+   SELECT 
+        fcltyNm, fcltyType, rdnmadr, lnmadr, latitude, longitude, operPhoneNumber, 
+        operInstitutionNm, homepageUrl, fcltyInfo, weekdayOperOpenHhmm, weekdayOperColseHhmm,  
+        holidayOperOpenHhmm, holidayCloseOpenHhmm, rstdeInfo, adultChrge, yngbgsChrge, 
+        childChrge, etcChrgeInfo, fcltyIntrcn, trnsportInfo, phoneNumber, institutionNm, 
+        referenceDate, insttCode 
+    FROM visionartdb.museum 
+    <where>
+        <if test="address != null and address != ''">
+            AND (rdnmadr LIKE CONCAT('%', #{address}, '%') OR 
+                 lnmadr LIKE CONCAT('%', #{address}, '%') OR 
+                 fcltyNm LIKE CONCAT('%', #{address}, '%'))
+        </if>
+        <!-- 다른 조건 추가 가능 -->
+    </where>
+     ORDER BY referenceDate DESC <!-- 날짜를 최신순으로 정렬 -->
+</select>
+</mapper>

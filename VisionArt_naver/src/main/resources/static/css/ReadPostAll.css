@@ -1,0 +1,324 @@
+@charset "UTF-8";
+
+/* 전체 선택자에 대한 초기화 및 기본 스타일 설정 */
+* {
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+	scroll-padding-top: 2rem;
+	box-sizing: border-box;
+}
+
+:root {
+	--container-color: #1a1e21;
+	--second-color: #fafafa;
+	--text-color: #172317;
+	--bg-color: #fff;
+}
+
+/* 텍스트 선택 영역 스타일 지정 */
+::selection {
+	color: var(--bg-color);
+	background: var(--second-color);
+}
+
+/* 하이퍼링크 스타일 설정 */
+a {
+	text-decoration: none;
+}
+
+
+/* 홈 섹션 스타일 */
+.home {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 90px;
+	margin-right: 90px;
+	border-radius: 1rem;
+	overflow-x: scroll;
+	white-space: nowrap;
+	background-color: #c7eeff;
+}
+h1{
+	font-size: 2.1rem;
+
+	text-align: center;
+	
+}
+.btn1{
+	width: 110px;
+	height: 40px;
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #fafafa;
+	float: right;
+	margin-right: 1.5%;
+	margin-top: 70px;
+	border-radius: 8px;
+	box-shadow: 1px 3px 5px darkgrey;
+}
+
+/* 섹션 스타일 설정 */
+section {
+	padding: 3rem 0 2rem;
+}
+
+/* 컨테이너 스타일 설정 */
+.container {
+	max-width: 1068px;
+	margin: auto;
+	width: 100%;
+}
+
+/* 포스트 스타일 설정 */
+.post {
+	display: grid;
+	grid-template-columns: repeat(1, 870px);
+	gap: 1.5rem;
+	max-width: 1300px;
+	max-height: 1038px;
+	border-radius: 1rem;
+	padding-left: 15%;
+	padding-bottom: 15%;
+	margin: auto;
+	align-items: center;
+	
+}
+.post-content-box{
+	display:flex;
+	flex-direction:row;
+	width: 100%;
+	/* padding-left: 22%; */
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	
+	
+}
+.post-content{
+
+	 display: -webkit-box; 
+	-webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+	overflow: hidden; 
+	text-align: center;   
+}
+.art-field-name{
+	width: 10%;
+	height: 25px;
+	font-size:1em;
+	text-align: center;
+	color: blue;
+	font-weight: bold;
+	background-color: #defcfc;
+	float: left;
+	margin-right: 1.5%;
+	margin-top: 10px;
+	border-radius: 8px;
+	box-shadow: 1px 3px 5px darkgrey;
+}
+/* 포스트 박스 스타일 설정 */
+.post-box {
+/* 	width: 870px; */
+	background: var(--bg-color);
+	box-shadow: 0 4px 10px hsl(355deg 25% 15% / 30%);
+	padding: 15px;
+	border-radius: 0.5rem;
+	border: 2px solid  #0077c0;
+	box-shadow: 0px 10px 10px darkgrey;
+}
+
+/* 포스트 이미지 스타일 설정 */
+.post-img {
+	/* padding-left:5%; */
+	width: 20%;
+	height: 120px;
+	border-radius: 0.5rem;
+	object-fit: cover;
+	object-position: center;
+	
+}
+
+/* 포스트 타이틀 스타일 설정 */
+.post-title {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-color);
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-align: center;
+}
+
+/* 프로필 스타일 설정 */
+.profile {
+	display: flex;
+	align-items: center;
+	gap: 10px; 
+	justify-content: flex-end;
+}
+
+/* 프로필 이미지 스타일 설정 */
+.profile-img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+
+}
+
+/* 좋아요 섹션 스타일 설정 */
+.like {
+	display: flex;
+	justify-content: flex-end;
+	/* align-items: center; */
+	
+	
+}
+
+.like-name {
+	margin-left: 5px;
+	font-size: 14px;
+}
+
+/* 좋아요 이미지 스타일 설정 */
+.like-img {
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+/* 	object-fit: cover; */
+/* 	object-position: center; */
+
+}
+.viewCount{
+	display:flex;
+	justify-content: flex-end;
+	font-size: 15px;
+}
+
+/* 프로필 이름 스타일 설정 */
+.profile-name {
+	font-size: 0.82rem;
+	font-weight: 500;
+}
+
+/* 포스트 타이틀 및 프로필 이미지 호버 시 커서 스타일 설정 */
+.post-title:hover, .post-img:hover
+ {
+  cursor: pointer;
+  -webkit-transform: scale(1.3);
+    transform: scale(1.2);
+}
+/*scroll bar */
+.home::-webkit-scrollbar{
+	height: 8px; /* 가로 스크롤바의 크기는 height로 조절;*/
+	 width: 8px; /* 세로 스크롤바의 크기는 width로 조절; */
+}
+.home::-webkit-scrollbar-thumb{
+	border-radius: 5px;
+	background-color: pink;
+}
+/* 미디어 쿼리 설정 */
+@media (max-width:1110px) {
+	.home {
+		margin: 0 auto;
+		width: 95%;
+		padding: 1%;
+	}
+	.post{margin: 0 auto;
+		padding-left: 5%;
+	padding-bottom: 5%;
+	}
+	.post-box {
+	width: 90%;
+		padding: 10px;
+	}
+}
+@media (max-width:900px) {
+	.home {
+		margin: 0 auto;
+		width: 95%;
+		padding: 1%;
+	}
+	.post{margin: 0 auto;
+		padding-left: 5%;
+	padding-bottom: 5%;
+	}
+	.post-box {
+	width: 85%;
+		padding: 10px;
+	}
+}
+
+@media (max-width:800px) {
+	.home {
+		margin: 0 auto;
+		width: 90%;
+	}
+	.post{margin: 0 auto;
+			padding-left: 3%;
+	padding-bottom: 3%;
+	}
+	.post-box {
+	width: 80%;
+		padding: 10px;
+	}
+}
+
+@media (max-width:768px) {
+
+	.home {margin: 0 auto;
+		width: 90%;
+		min-height: 380px;
+	}
+	.post{margin: 0 auto;
+			padding-left: 1%;
+	padding-bottom: 1%;
+	}
+	.post-box {
+	width: 65%;
+		padding: 10px;
+	}
+}
+
+@media (max-width:500px) {
+	.home {
+		width: 100%;
+		min-height: 300px;
+	}
+
+	.post-box {
+	width: 45%;
+		padding: 10px;
+	}
+}
+
+/* 페이지네이션 섹션 스타일 설정 */
+.pagination-section {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.pagination {
+	list-style: none;
+	display: flex;
+	gap: 8px;
+}
+
+.pagination li {
+	display: inline-block;
+	padding: 6px 12px;
+	background-color: var(--second-color);
+	color: white;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.pagination li.active {
+	background-color: var(--bg-color);
+	color: pink;
+	cursor: default;
+}

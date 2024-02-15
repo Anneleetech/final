@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+.contents {
+	padding-top: 50px;
+	padding-left: 70px;	
+	margin-bottom: 50px;
+}
+
+.content {
+	float: left;
+	width: 45%;
+	height: 500px;
+	margin-bottom: 50px;
+}
+.contents::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+#search {
+	float: left;
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+#map {
+	float: left;
+	width: 45%;
+	height: 520px;
+	margin-right: 6%;
+	margin-bottom: 50px;
+}
+
+#searchInput {
+	width: 95%;
+	height: 28px;
+	resize: none;
+	border-width: 2px;
+	border-style: solid;
+	border-color:#c7eeff;;
+	box-shadow: 0 0 7px lightgray;
+	margin-right: 10px;
+}
+
+#searchBtn {
+	float: right;
+	text-align: center;
+	width: 75px;
+	height: 30px;
+	font-size: 15px;
+	font-weight: 550;
+	border-color: #c7eeff;
+	background-color: #ffe6eb;
+	border-radius: 8px;
+	box-shadow: 3px 3px 3px lightgrey;
+	margin-top: 10px;
+	margin-right: 4%;
+}
+
+#showInfo {
+	float: inline-start;
+	width: 93%;
+	height: 395px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #c7eeff;;
+	box-shadow: 0 0 7px lightgray;
+	/* overflow: scroll; */
+	overflow-y: auto; /* 세로 스크롤바 추가 */
+    overflow-x: auto;
+	padding: 10px;
+}
+/* 스크롤바 색상 및 너비 설정 */
+#showInfo::-webkit-scrollbar {
+    width: 12px; /* 수직 스크롤바 너비 */
+}
+
+#showInfo::-webkit-scrollbar-thumb {
+    background-color: pink; /* 스크롤바 색상 */
+    border-radius: 6px; /* 스크롤바 모서리 둥글게 */
+}
+
+#showInfo::-webkit-scrollbar-track {
+    background-color: #ffe6eb; /* 스크롤바 트랙 배경색 */
+}
+
+/* 가로 스크롤바 스타일링 */
+#showInfo::-webkit-scrollbar-horizontal {
+    height: 12px; /* 수평 스크롤바 높이 */
+}
+
+#showInfo::-webkit-scrollbar-thumb:horizontal {
+    background-color: pink; /* 수평 스크롤바 색상 */
+}
+
+#showInfo::-webkit-scrollbar-track:horizontal {
+    background-color: #ffe6eb; /* 수평 스크롤바 트랙 배경색 */
+}
+
+.scrollable-content {
+    max-height: 200px;  /* 원하는 높이로 조절 가능 */
+    max-width: 300px;   /* 원하는 너비로 조절 가능 */
+    overflow-y: auto;
+    overflow-x: auto;
+}
+/* 스크롤바 색상 및 너비 설정 */
+.scrollable-content::-webkit-scrollbar {
+    width: 12px;  /* 수직 스크롤바 너비 */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background-color: pink;  /* 스크롤바 색상 */
+    border-radius: 6px;  /* 스크롤바 모서리 둥글게 */
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background-color:  #ffe6eb;  /* 스크롤바 트랙 배경색 */
+}
+
+/* 가로 스크롤바 스타일링 */
+.scrollable-content::-webkit-scrollbar-horizontal {
+    height: 12px;  /* 수평 스크롤바 높이 */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:horizontal {
+    background-color:pink;  /* 수평 스크롤바 색상 */
+}
+
+.scrollable-content::-webkit-scrollbar-track:horizontal {
+    background-color:  #ffe6eb;  /* 수평 스크롤바 트랙 배경색 */
+}

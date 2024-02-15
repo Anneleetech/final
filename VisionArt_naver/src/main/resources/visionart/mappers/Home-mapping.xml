@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.mc.full17th2.dao.HomeDAO">
+
+ <!-- Only 자유게시글  -->
+  <select id="hitSelectPostsHome" resultType="postdto">
+    SELECT * FROM visionartdb.post
+   WHERE post_field_id = 0 
+    ORDER BY post_id DESC
+    LIMIT #{limit} OFFSET #{offset};
+</select>
+ <!-- 모든 게시글  -->
+ 	<select id="selectPostsHome" resultType="postdto">
+ 		SELECT * FROM visionartdb.post 
+ 		order by views DESC
+ 		LIMIT #{limit} OFFSET #{offset};
+ 	</select>
+ 	<!-- Only Art (유저갤러리,명화갤러리) -->
+ 	<select id="selectPostsForGalleryHome" resultType="postdto">
+ 		SELECT * FROM visionartdb.post 
+ 		WHERE post_field_id = 1 OR post_field_id = 2
+ 		order by views DESC
+ 		LIMIT #{limit} OFFSET #{offset};
+ 	</select>
+
+ 	
+ 	<select id="selectPopPosts" resultType="int">
+ 	SELECT post_id FROM visionartdb.post_like
+	WHERE post_id IN (SELECT post_id FROM visionartdb.post WHERE post_field_id = 1 OR post_field_id = 2)
+	GROUP BY post_id
+	ORDER BY COUNT(*) DESC
+	LIMIT 5;
+ 	</select>	 
+ 	
+ 	 <select id="selectPopPosts2" parameterType="java.util.List" resultType="postdto">
+ 	<if test="list != null and list.size() > 0">
+    SELECT * FROM visionartdb.post WHERE post_id IN 
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+    ORDER BY FIELD(post_id, 
+    <foreach item="item" index="index" collection="list" separator=","> #{item} </foreach>);
+  </if>
+</select>
+ 		
+ 	 <select id="selectMembers" resultType="memberdto2">
+ 		SELECT * FROM visionartdb.member; 
+ 	</select> 
+ 	
+ 		<!-- artfieldName  -->
+	<select id="getArtFieldName" resultType="artfielddto">
+	select * from visionartdb.art_field;
+	</select>
+	
+<!--total -->
+ 	<select id="getTotalPosts" resultType="int">
+		SELECT COUNT(*) AS totalPosts FROM visionartdb.post
+		WHERE post_field_id = 1 OR post_field_id = 2;
+	</select>
+	 <!-- --><!-- --><!-- --><!-- --><!-- -->
+<!--likes -->
+	<select id="selectLikes" resultType="likedto" parameterType="map">
+		SELECT * FROM visionartdb.post_like where member_id = #{memberId};
+	</select>
+	
+	<insert id="updateLike" parameterType="map">
+    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberid}, #{postid});
+	</insert> 
+	
+	 <select id="likeExists" resultType="int" parameterType="map">
+		SELECT count(*) FROM visionartdb.post_like where member_id = #{memberid} AND post_id = #{post_id};
+	</select> 
+	
+ <delete id="deleteLike" parameterType="map">
+    	DELETE FROM visionartdb.post_like WHERE member_id = #{memberid} AND post_id = #{post_id}
+	</delete>
+	
+	<select id="likeTotal" resultType="likedto">
+		SELECT * FROM visionartdb.post_like;
+	</select>
+	<!--images -->
+	<select id="imageTotal" resultType="imagedto">
+		SELECT * FROM visionartdb.post_attachment;
+	</select> 
+	<!-- --><!-- --><!-- --><!-- --><!-- --><!-- -->
+	<select id="imageOne" resultType="string" parameterType="int">
+		SELECT post_att_path FROM visionartdb.post_attachment WHERE post_id = #{post_id};
+	</select>
+ 
+ 
+ </mapper>

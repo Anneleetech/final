@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "mybatis-3-config.dtd">
+  
+<configuration>
+<settings>
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+    <!-- 추가적인 설정들을 필요에 따라 포함 -->
+  
+	<typeAliases>
+		<typeAlias type="com.mc.full17th2.dto.PostDTO" alias="postdto"/>
+		<typeAlias type="com.mc.full17th2.dto.PostDTO2" alias="postdto2"/>
+		<typeAlias type="com.mc.full17th2.dto.UgPostDTO2" alias="ugpostdto2"/>
+		<typeAlias type="com.mc.full17th2.dto.UgPostDTO" alias="ugpostdto"/>
+		<typeAlias type="com.mc.full17th2.dto.CommentDTO" alias="commentdto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgCommentDTO" alias="ugcommentdto"/>
+		<typeAlias type="com.mc.full17th2.dto.ImageDTO" alias="imagedto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgImageDTO" alias="ugimagedto"/>
+		<typeAlias type="com.mc.full17th2.dto.LikeDTO" alias="likedto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgLikeDTO" alias="uglikedto"/>
+		<typeAlias type="com.mc.full17th2.dto.HomeDTO" alias="homedto"/>
+		<typeAlias type="com.mc.full17th2.dto.MuseumDTO" alias="museumdto"/>
+			<typeAlias type="com.mc.full17th2.dto.MemberDTO" alias="memberDto"/>
+		<typeAlias type="com.mc.full17th2.dto.MemberDTO2" alias="memberdto2"/>
+		<typeAlias type="com.mc.full17th2.dto.UgMemberDTO" alias="ugmemberdto"/>
+		<typeAlias type="com.mc.full17th2.dto.InformDTO" alias="informdto"/>
+		<typeAlias type="com.mc.full17th2.dto.ArtFieldDTO" alias="artfielddto"/>
+		<typeAlias type="com.mc.full17th2.dto.ArtistDTO" alias="artistdto"/>
+		<typeAlias type="com.mc.full17th2.dto.UgArtFieldDTO" alias="ugartfielddto"/>
+		
+		<typeAlias type="com.mc.full17th2.dto.FamousGallaryDTO" alias="famousGallaryDto"/>
+	</typeAliases>
+	
+  
+ 
+</configuration>
+

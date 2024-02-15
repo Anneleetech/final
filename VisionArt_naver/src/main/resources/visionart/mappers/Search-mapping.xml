@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.mc.full17th2.dao.SearchDAO">
+ <!-- Search -->
+ <select id="searchPosts" parameterType="String" resultType="postdto">
+    SELECT title, content, post_datetime, views, post_id, member_id, post_field_id, art_field_id
+	FROM visionartdb.post
+	WHERE
+    title LIKE CONCAT('%', #{query}, '%') OR
+    content LIKE CONCAT('%', #{query}, '%');
+    
+</select>
+ 
+<select id="selectSearchPosts" parameterType="map" resultType="postdto">
+  SELECT title, content, post_datetime, views, post_id, member_id, post_field_id, art_field_id
+	FROM visionartdb.post
+	   WHERE
+        (title LIKE CONCAT('%', #{query}, '%') OR
+        content LIKE CONCAT('%', #{query}, '%'))
+        AND post_field_id = 0
+    LIMIT #{pageSize} OFFSET #{offset};
+</select>
+
+<select id="selectSearchUgPosts" parameterType="map" resultType="postdto">
+  SELECT title, content, post_datetime, views, post_id, member_id, post_field_id, art_field_id
+	FROM visionartdb.post
+	   WHERE
+        (title LIKE CONCAT('%', #{query}, '%') OR
+        content LIKE CONCAT('%', #{query}, '%'))
+        AND (post_field_id = 1)
+    LIMIT #{pageSize} OFFSET #{offset};
+</select>
+
+<select id="selectSearchFgPosts" parameterType="map" resultType="postdto">
+  SELECT title, content, post_datetime, views, post_id, member_id, post_field_id, art_field_id
+	FROM visionartdb.post
+	   WHERE
+        (title LIKE CONCAT('%', #{query}, '%') OR
+        content LIKE CONCAT('%', #{query}, '%'))
+        AND (post_field_id = 2)
+    LIMIT #{pageSize} OFFSET #{offset};
+</select>
+
+<select id="selectSearchCategary"  resultType="artfielddto">
+    SELECT *
+    FROM visionartdb.art_field
+    WHERE
+    <if test="query != null and query != ''">
+        art_field_name LIKE CONCAT('%', #{query}, '%')
+    </if>
+</select>
+
+
+<select id="selectSearchGalleryPosts" parameterType="map" resultType="postdto">
+    SELECT *
+    FROM visionartdb.post
+    WHERE
+        <if test="arts != null and arts.size() > 0">
+            (art_field_id IN
+            <foreach item="art" collection="arts" separator="," open="(" close=")">
+                #{art.art_field_id}
+            </foreach>)
+            AND
+        </if>
+        <if test="arts = null or arts.isEmpty()">
+          (art_field_id =10)
+            AND
+         </if>
+        (post_field_id = 1 OR post_field_id = 2)
+      <!--   <if test="query != null and query != ''"> query 값이 비어 있을 때 아무 데이터도 반환 안함
+            AND (title LIKE CONCAT('%', #{query}, '%') OR content LIKE CONCAT('%', #{query}, '%'))
+        </if> -->
+    LIMIT #{pageSize} OFFSET #{offset};
+</select>
+
+ 	
+<select id="searchAllAuthor" parameterType="map" resultType="postdto">
+    SELECT *
+    FROM visionartdb.post
+    WHERE
+        <if test="members != null and members.size() > 0">
+            (member_id IN
+            <foreach item="members" collection="members" separator="," open="(" close=")">
+                #{members.member_id}
+            </foreach>)
+            AND
+        </if>
+        <if test="members = null or members.isEmpty()">
+          (member_id =0)
+            AND
+         </if>
+        (post_field_id = 1 OR post_field_id = 2)
+      <!--   <if test="query != null and query != ''"> query 값이 비어 있을 때 아무 데이터도 반환 안함
+            AND (title LIKE CONCAT('%', #{query}, '%') OR content LIKE CONCAT('%', #{query}, '%'))
+        </if> -->
+    LIMIT #{pageSize} OFFSET #{offset};
+</select>
+ 
+ 
+ 	 <select id="selectMembers" resultType="memberdto2">
+ 		SELECT * FROM visionartdb.member; 
+ 	</select> 
+ 	
+ 	 <select id="selectMembersWithQuery" resultType="memberdto2">
+ 		SELECT * FROM visionartdb.member
+ 		WHERE
+    <if test="query != null and query != ''">
+        name LIKE CONCAT('%', #{query}, '%') OR
+        nickname LIKE CONCAT('%', #{query}, '%')OR
+        id LIKE CONCAT('%', #{query}, '%')OR
+        email LIKE CONCAT('%', #{query}, '%')
+    </if>
+</select> 
+ 		<!-- artfieldName  -->
+	<select id="getArtFieldName" resultType="artfielddto">
+	select * from visionartdb.art_field;
+	</select>
+	<!-- total -->
+	 	<select id="getTotalQueryPosts" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS totalPosts FROM visionartdb.post
+		WHERE
+   		 title LIKE CONCAT('%', #{query}, '%') OR
+    	content LIKE CONCAT('%', #{query}, '%')
+	</select>
+	
+	
+ <!-- 	<select id="getTotalPosts" resultType="int">
+		SELECT COUNT(*) AS totalPosts FROM visionartdb.post
+		WHERE post_field_id = 1 OR post_field_id = 2;
+	</select> -->
+	 <!-- --><!-- --><!-- --><!-- --><!-- -->
+	 
+	 
+<!--likes -->	
+	<select id="selectLikes" resultType="likedto" parameterType="map">
+		SELECT * FROM visionartdb.post_like where member_id = #{memberId};
+	</select>
+	
+	<insert id="updateLike" parameterType="map">
+    INSERT INTO visionartdb.post_like (member_id, post_id) VALUES (#{memberId}, #{post_id});
+	</insert> 
+	
+	 <select id="likeExists" resultType="int" parameterType="map">
+		SELECT count(*) FROM visionartdb.post_like where member_id = #{memberId} AND post_id = #{post_id};
+	</select> 
+	
+ 	<delete id="deleteLike" parameterType="map">
+    	DELETE FROM visionartdb.post_like WHERE member_id = #{memberId} AND post_id = #{post_id}
+	</delete>
+	
+	<select id="likeTotal" resultType="likedto">
+		SELECT * FROM visionartdb.post_like;
+	</select>
+<!--images -->	
+	<select id="imageTotal" resultType="imagedto">
+		SELECT * FROM visionartdb.post_attachment;
+	</select> 
+	<!-- --><!-- --><!-- --><!-- --><!-- --><!-- -->
+	<select id="imageOne" resultType="string" parameterType="int">
+		SELECT post_att_path FROM visionartdb.post_attachment WHERE post_id = #{post_id};
+	</select>
+ 
+ 
+ </mapper>

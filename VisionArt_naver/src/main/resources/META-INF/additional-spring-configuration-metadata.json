@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "openapi.url",
+    "type": "java.lang.String",
+    "description": "A description for 'openapi.url'"
+  },
+  {
+    "name": "museum.openapi.service-key",
+    "type": "java.lang.String",
+    "description": "A description for 'museum.openapi.service-key'"
+  }
+]}

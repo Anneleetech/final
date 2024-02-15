@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mc.full17th2.dao.PostDAO">
+<!-- 게시글 작성 페이지 -->
+ 	<!-- 게시글 작성 -->
+	<insert id="insertPost" parameterType="postdto2" useGeneratedKeys="true" keyProperty="post_id" keyColumn="post_id"> 
+       INSERT INTO visionartdb.post (title, content, member_id, post_field_id, art_field_id)
+    VALUES (#{title}, #{content}, #{member_id}, #{post_field_id}, #{art_field_id})
+	</insert>
+
+<!-- 게시글 이미지 작성 및 수정 -->
+	<insert id="saveImageFilename1" parameterMap="saveImageFilenameParams1">
+	    INSERT INTO visionartdb.post_attachment(post_att_path, post_id)
+	    VALUES (#{newFilename}, #{post_id})
+	</insert>
+	
+	<parameterMap id="saveImageFilenameParams1" type="java.util.Map">
+	    <parameter property="newFilename" />
+	    <parameter property="post_id" />
+	</parameterMap>
+	
+<!-- 게시글 수정 페이지 -->
+	<!-- 게시글 하나 조회 -->
+	<select id="getPostById" resultType="postdto2" parameterType="int"> 
+	SELECT title,content, art_field_id FROM visionartdb.post WHERE post_id
+		= #{post_id}
+	</select>
+	<!--게시글 이미지 리스트로 조회 -->
+	<select id="getImageFilenames" parameterType="Integer" resultType="String"> 
+	SELECT post_att_path FROM visionartdb.post_attachment WHERE post_id = #{post_id}
+	</select>
+
+	<!-- 게시글 글 수정 -->
+	<update id="updatePost" parameterType="postdto2">
+     UPDATE visionartdb.post
+    SET title = #{title}, content = #{content}, post_field_id = #{post_field_id}, art_field_id = #{art_field_id}
+    WHERE post_id = #{post_id}
+	</update>
+
+	<!-- 게시글 기존 이미지 삭제 -->
+	<delete id="deleteoldImages" parameterType="int"> DELETE FROM
+		visionartdb.post_attachment WHERE post_id = #{post_id}; </delete>	
+	
+
+<!-- 게시글 art_field_name 조회 -->
+	<select id="getArtFieldName" resultType="String" parameterType="int">
+	SELECT art_field_name FROM visionartdb.art_field WHERE art_field_id =#{artFieldId}
+	</select>
+	
+	
+	<!-- 이미지 업로드 쿼리 -->
+<!-- 	<update id="UpdateImage" parameterType="postdto2"> UPDATE visionartdb.post_attachment
+		SET post_att_path = #{post_att_path} WHERE post_id = #{post_id}
+	</update>
+	 -->
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mc.full17th2.dao.TempPostDAO">
+    <resultMap id="tempMyPagePostDTO" type="com.mc.full17th2.dto.TempMyPagePostDTO">
+        <result property="postId" column="post_id"/>
+        <result property="postFieldId" column="post_field_id"/>
+        <result property="postFieldName" column="post_field_name"/>
+        <result property="artFieldId" column="art_field_id"/>
+        <result property="artFieldName" column="art_field_name"/>
+        <result property="postDate" column="post_datetime"/>
+        <result property="postTime" column="post_datetime"/>
+        <result property="title" column="title"/>
+    </resultMap>
+
+    <!-- 불러오는 전체 데이터 개수 -->
+    <select id="getMyAllPostCount">
+        <![CDATA[ 
+            SELECT COUNT(*) FROM post WHERE member_id=#{memberId};
+        ]]>
+    </select>
+
+    <select id="getMyAllPosts" resultMap="tempMyPagePostDTO">
+        <![CDATA[ 
+        SELECT post_id, post.post_field_id, post_field_name, post.art_field_id, art_field_name, post_datetime, title
+            FROM post
+            LEFT JOIN post_field pf ON post.post_field_id=pf.post_field_id
+            LEFT JOIN art_field af ON post.art_field_id=af.art_field_id
+            WHERE member_id=#{memberId}
+            ORDER BY post_id DESC
+            LIMIT #{start}, #{limit};
+        ]]>
+    </select>
+</mapper>

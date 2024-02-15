@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.container {
+    display: flex;
+    align-items: center; /* 가로 방향에서 중앙 정렬 */
+    justify-content: center; /* 세로 방향에서 중앙 정렬 */
+    margin:50px;
+    /*height: 80vh; /* 뷰포트 높이에 대한 100% 설정으로 세로 중앙 정렬 */
+}
+
+.container_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가로 방향에서 중앙 정렬 */
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.member_info {
+    padding: 20px;
+    margin: 20px;
+}
+
+/* .member_nickname, .member_id, 
+.member_pw, .member_pw_check{
+	margin-bottom: 30px;
+} */
+
+.input_member{
+    margin-bottom: 30px;
+}
+
+.container input:not([type="submit"]) {
+  font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  /* padding-bottom: 10px;
+  padding-left: 10px; */
+  padding:15px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.container input[type="submit"] {
+	background-color: #BDDEF4;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+    width:80%;
+    padding:15px;
+    font-size: medium;
+}
+
+.title{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.message_ok{
+    color:blue;
+}
+
+.message_error{
+    color:red;
+}
